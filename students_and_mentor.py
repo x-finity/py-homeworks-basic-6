@@ -35,7 +35,7 @@ class Student:
         grade_sum = 0
         grades_count = 0
         for student in students:
-            if course in student.courses_in_progress or course in student.finished_courses:
+            if isinstance(student, Student) and course in student.courses_in_progress or course in student.finished_courses:
                 grade_sum += sum(student.grades[course])
                 grades_count += len(student.grades[course])
         print(f'Средняя оценка за домашние задания по курсу {course}: {round(grade_sum / grades_count, 1)}')
@@ -67,10 +67,10 @@ class Lecturer(Mentor):
     def course_avg_grade(self, course, *lecturers):
         grade_sum = 0
         grades_count = 0
-        for mentor in lecturers:
-            if course in mentor.courses_attached:
-                grade_sum += sum(mentor.grades[course])
-                grades_count += len(mentor.grades[course])
+        for lecturer in lecturers:
+            if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached:
+                grade_sum += sum(lecturer.grades[course])
+                grades_count += len(lecturer.grades[course])
         print(f'Средняя оценка за лекции по курсу {course}: {round(grade_sum / grades_count, 1)}')
     def __lt__(self, other):
         return self.get_average_grade() < other.get_average_grade()
