@@ -35,7 +35,7 @@ class Student:
         grade_sum = 0
         grades_count = 0
         for student in students:
-            if isinstance(student, Student) and course in student.courses_in_progress or course in student.finished_courses:
+            if isinstance(student, Student) and (course in student.courses_in_progress or course in student.finished_courses):
                 grade_sum += sum(student.grades[course])
                 grades_count += len(student.grades[course])
         print(f'Средняя оценка за домашние задания по курсу {course}: {round(grade_sum / grades_count, 1)}')
